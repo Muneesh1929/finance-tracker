@@ -60,7 +60,7 @@ app.use("/api", userRoutes);
 app.use("/api", recordRoutes);
 
 app.get("/" , (req,res) => {
-    res.send("server is running")
+    res.redirect("/api/login");
 })
 
 app.listen(PORT, () => {
