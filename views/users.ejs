@@ -1,0 +1,49 @@
+<% layout("layouts/boilerplate") %>
+
+<h2 class="mb-4">Manage Users</h2>
+
+<div class="mb-3 d-flex justify-content-between">
+    <a href="/api/dashboard" class="btn btn-secondary">
+        ← Back
+    </a>
+
+    <span class="text-muted">Admin Panel</span>
+</div>
+
+<table class="table table-bordered">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Change Role</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% users.forEach(userItem => { %>
+            <tr>
+                <td><%= userItem.name %></td>
+                <td><%= userItem.email %></td>
+                <td><%= userItem.role %></td>
+
+                <td>
+                    <form action="/api/users/<%= userItem._id %>/role?_method=PUT" method="POST">
+
+                        <select name="role" class="form-select mb-2">
+                            <option value="viewer">Viewer</option>
+                            <option value="analyst">Analyst</option>
+                            <option value="admin">Admin</option>
+                        </select>
+
+                        <button class="btn btn-primary btn-sm">
+                            Update
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+
+</table>

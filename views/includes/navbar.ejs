@@ -1,0 +1,17 @@
+<div style="background:#333; color:white; padding:10px; display:flex; justify-content:space-between;">
+    
+    <div>
+        <strong>Finance Tracker</strong>
+    </div>
+
+    <div>
+        <% if (user) { %>
+            Role: <%= user.role %> |
+            <a href="/api/logout" style="color:white;">Logout</a>
+        <% } else { %>
+            <a href="/api/login" style="color:white;">Login</a>
+        <% } %>
+    </div>
+
+</div>
+<br>

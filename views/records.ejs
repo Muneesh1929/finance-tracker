@@ -1,0 +1,72 @@
+<% layout("layouts/boilerplate") %>
+
+    <h2 class="mb-4">All Records</h2>
+
+    <div class="mb-3">
+        <a href="/api/dashboard" class="btn btn-secondary">Dashboard</a>
+
+        <% if (user.role==="admin" ) { %>
+            <a href="/api/records/new" class="btn btn-primary ms-2">Add Record</a>
+            <% } %>
+    </div>
+
+    <p class="text-muted">Total Records: <%= records.length %>
+    </p>
+    <table class="table table-bordered table-hover shadow-sm">
+
+        <thead class="table-dark">
+            <tr>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Date</th>
+                <th>Note</th>
+                <% if (user.role==="admin" ) { %>
+                    <th>Actions</th>
+                    <% } %>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% records.forEach(record=> { %>
+                <tr>
+                    <td><strong>₹<%= record.amount %></strong></td>
+
+                    <td>
+                        <% if (record.type==="income" ) { %>
+                            <span class="badge bg-success">Income</span>
+                            <% } else { %>
+                                <span class="badge bg-danger">Expense</span>
+                                <% } %>
+                    </td>
+
+                    <td>
+                        <%= record.category %>
+                    </td>
+
+                    <td>
+                        <%= record.date ? record.date.toDateString() : "" %>
+                    </td>
+
+                    <td>
+                        <%= record.note %>
+                    </td>
+
+                    <% if (user.role==="admin" ) { %>
+                        <td>
+                            <a href="/api/records/<%= record._id %>/edit" class="btn btn-sm btn-primary me-1">
+                                Edit
+                            </a>
+
+                            <form action="/api/records/<%= record._id %>?_method=DELETE" method="POST"
+                                style="display:inline;">
+                                <button class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                        <% } %>
+                </tr>
+                <% }) %>
+        </tbody>
+    </table>
