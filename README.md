@@ -60,6 +60,15 @@ You can use the following credentials to explore different roles in the system:
 
 ---
 
+## ⚠️ Assumptions
+
+* The system includes three roles: **Admin, Analyst, and Viewer**
+* Only **Admin** can manage users and financial records
+* **Analyst** and **Viewer** have limited access based on their roles
+* Admin can not give admin to other there is only 1 admin to make multiple admin we have to change in DB
+* Authentication is handled using session-based login
+
+
 ## 📌 Objective
 
 This project was developed to demonstrate backend engineering skills including:
