@@ -9,6 +9,7 @@ const LocalStrategy = require("passport-local");
 require("dotenv").config();
 const flash = require("connect-flash");
 const ejsMate = require("ejs-mate");
+const PORT = process.env.PORT || 8080;
 
 
 const userRoutes = require("./routes/userRoutes.js");
@@ -62,6 +63,6 @@ app.get("/" , (req,res) => {
     res.send("server is running")
 })
 
-app.listen(8080 , () => {
-    console.log("server running at port 8080");
-})
+app.listen(PORT, () => {
+    console.log(`server running at port ${PORT}`);
+});
