@@ -14,6 +14,7 @@ https://finance-tracker-30bc.onrender.com
 ## 🔑 Demo Credentials (For Testing)
 
 You can use the following credentials to explore different roles in the system:
+You can make new users also by signing up(new user will be a viewer to upgrade it you need to login to admin then edit role of that user)
 
 ### 👑 Admin
 
@@ -29,8 +30,8 @@ You can use the following credentials to explore different roles in the system:
 
 ### 📊 Analyst
 
-- **Email:** analyst@gmail.com  
-- **Password:** analyst  
+- **Email:** user3@gmail.com  
+- **Password:** user3
 
 👉 Access:
 - View financial records
@@ -40,8 +41,8 @@ You can use the following credentials to explore different roles in the system:
 
 ### 👁️ Viewer
 
-- **Email:** viewer@gmail.com  
-- **Password:** viewer  
+- **Email:** user1@gmail.com  
+- **Password:** user1
 
 👉 Access:
 - Read-only access to dashboard data
@@ -55,13 +56,6 @@ You can use the following credentials to explore different roles in the system:
 
 2. Login using above credentials  
 3. Explore features based on role  
-
----
-
-## ⚠️ Note
-- Admin role assignment is restricted at UI level  
-- Uses session-based authentication  
-- Render free tier may take time to start  
 
 ---
 
