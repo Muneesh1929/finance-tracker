@@ -14,7 +14,8 @@ https://finance-tracker-30bc.onrender.com
 ## 🔑 Demo Credentials (For Testing)
 
 You can use the following credentials to explore different roles in the system:
-You can make new users also by signing up(new user will be a viewer to upgrade it you need to login to admin then edit role of that user)
+
+- You can make new users also by signing up(new user will be a viewer to upgrade it you need to login to admin then edit role of that user):
 
 ### 👑 Admin
 
