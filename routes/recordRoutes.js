@@ -4,7 +4,7 @@ const Record = require("../models/Record");
 const { isViewer, isAnalyst, isAdmin, isLoggedIn } = require("../middleware/roleMiddleware");
 const { validateRecord } = require("../middleware/validationMiddleware");
 
-router.post("/records", isLoggedIn, isAdmin, validateRecord,async (req, res) => {
+router.post("/records", isLoggedIn, isAdmin, validateRecord, async (req, res) => {
     try {
         const newRecord = new Record({ ...req.body, createdBy: req.user._id });
         await newRecord.save();
@@ -23,23 +23,31 @@ router.get("/records/new", isLoggedIn, isAdmin, (req, res) => {
 
 router.get("/records/view", isLoggedIn, isAnalyst, async (req, res) => {
     try {
-        let filter = {};
+        let filter = {
+            createdBy: req.user._id
+        };
         if (req.query.type) {
             filter.type = req.query.type;
         }
         if (req.query.category) {
             filter.category = req.query.category;
         }
+        if (req.query.startDate && req.query.endDate) {
+            filter.date = {
+                $gte: new Date(req.query.startDate),
+                $lte: new Date(req.query.endDate)
+            };
+        }
         const records = await Record.find(filter);
-        res.render("records", { records });
+        res.render("records", { records, req });
     } catch (err) {
         res.status(500).json({ error: "Server error" });
     }
 });
 
-router.get("/dashboard",isLoggedIn ,async (req, res) => {
+router.get("/dashboard", isLoggedIn, async (req, res) => {
     try {
-        const records = await Record.find();
+        const records = await Record.find({ createdBy: req.user._id });
         let totalIncome = 0;
         let totalExpense = 0;
         records.forEach((record) => {
@@ -60,7 +68,7 @@ router.get("/dashboard",isLoggedIn ,async (req, res) => {
     }
 });
 
-router.put("/records/:id", isLoggedIn, isAdmin, validateRecord,async (req, res) => {
+router.put("/records/:id", isLoggedIn, isAdmin, validateRecord, async (req, res) => {
     try {
         const recordId = req.params.id;
 

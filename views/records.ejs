@@ -10,6 +10,36 @@
             <% } %>
     </div>
 
+    <form method="GET" action="/api/records/view" class="row g-3 mb-4">
+
+        <div class="col-md-3">
+            <select name="type" class="form-select">
+                <option value="">All Types</option>
+                <option value="income" <%=req.query.type==="income" ? "selected" : "" %>>Income</option>
+                <option value="expense" <%=req.query.type==="expense" ? "selected" : "" %>>Expense</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <input type="text" name="category" class="form-control" value="<%= req.query.category || '' %>"
+                placeholder="Category" />
+        </div>
+        <div class="col-md-3">
+            <input type="date" name="startDate" class="form-control">
+        </div>
+
+        <div class="col-md-3">
+            <input type="date" name="endDate" class="form-control">
+        </div>
+
+
+        <div class="col-md-3">
+            <button class="btn btn-primary">Filter</button>
+            <a href="/api/records/view" class="btn btn-secondary">Reset</a>
+        </div>
+
+    </form>
+
     <p class="text-muted">Total Records: <%= records.length %>
     </p>
     <table class="table table-bordered table-hover shadow-sm">
