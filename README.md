@@ -60,6 +60,26 @@ You can use the following credentials to explore different roles in the system:
 
 ---
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="screenshots/login.jpeg" width="600">
+</p>
+
+<p align="center">
+  <img src="screenshots/dashboard.jpeg" width="600">
+</p>
+
+<p align="center">
+  <img src="screenshots/manage_users.jpeg" width="600">
+</p>
+
+<p align="center">
+  <img src="screenshots/records.jpeg" width="600">
+</p>
+
+---
+
 ## ⚠️ Assumptions
 
 * The system includes three roles: **Admin, Analyst, and Viewer**
