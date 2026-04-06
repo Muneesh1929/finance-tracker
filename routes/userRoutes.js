@@ -19,10 +19,27 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-router.post("/login", passport.authenticate("local",{failureRedirect: "/api/login"}),(req, res) => {
-        res.redirect("/api/dashboard");
-    }
-);
+router.post("/login", (req, res, next) => {
+    passport.authenticate("local", async (err, user, info) => {
+        if (err) return next(err);
+        if (!user) {
+            const existingUser = await User.findOne({ email: req.body.username });
+            if (!existingUser) {
+                req.flash("error", "You don't have an account. Please sign up first.");
+            } else {
+                req.flash("error", "Incorrect password");
+            }
+            return res.redirect("/api/login");
+        }
+
+        req.logIn(user, (err) => {
+            if (err) return next(err);
+            req.flash("success", "Welcome back!");
+            return res.redirect("/api/dashboard");
+        });
+
+    })(req, res, next);
+});
 
 router.get("/signup" , (req , res) => {
     res.render("signup");
@@ -60,19 +77,6 @@ router.put("/users/:id/role", isLoggedIn, isAdmin, async (req, res) => {
         }
         const { role } = req.body;
         await User.findByIdAndUpdate(req.params.id, { role });
-        req.flash("success", "User role updated successfully");
-        res.redirect("/api/users");
-    } catch (err) {
-        res.status(500).send(err.message);
-    }
-});
-
-router.put("/users/:id/role", isLoggedIn, isAdmin, async (req, res) => {
-    try {
-        const { role } = req.body;
-
-        await User.findByIdAndUpdate(req.params.id, { role });
-
         req.flash("success", "User role updated successfully");
         res.redirect("/api/users");
     } catch (err) {
