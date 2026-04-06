@@ -23,9 +23,7 @@ router.get("/records/new", isLoggedIn, isAdmin, (req, res) => {
 
 router.get("/records/view", isLoggedIn, isAnalyst, async (req, res) => {
     try {
-        let filter = {
-            createdBy: req.user._id
-        };
+        let filter = {};
         if (req.query.type) {
             filter.type = req.query.type;
         }
